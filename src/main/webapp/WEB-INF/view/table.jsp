@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <c:url value="/css/styles.css" var="css_url"/>
     <link href="${css_url}" type="text/css" rel="stylesheet"/>
-    <c:url value="/js/getTasksMocked.js" var="js_url"/>
+    <c:url value="/js/getTasks.js" var="js_url"/>
     <script type="text/javascript" src="${js_url}"></script>
 </head>
 <h1>Table page</h1>

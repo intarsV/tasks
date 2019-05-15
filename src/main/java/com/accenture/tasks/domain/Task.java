@@ -12,6 +12,9 @@ public class Task {
     private String taskTitle;
     private TaskStatusEnum statusEnum;
 
+    public Task() {
+    }
+
     public Task(Long id, String taskTitle, TaskStatusEnum statusEnum) {
         this.id = id;
         this.taskTitle = taskTitle;
