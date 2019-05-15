@@ -1,0 +1,15 @@
+
+h1 {
+    color: blue;
+}
+
+table {
+    border: 1px solid green;
+}
+
+th{
+    border: 1px solid green;
+}
+.myclass{
+    color: red;
+}
