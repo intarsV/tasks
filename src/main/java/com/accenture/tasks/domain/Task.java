@@ -1,7 +1,13 @@
 package com.accenture.tasks.domain;
 
-public class Task {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class Task {
+    @Id
+    @GeneratedValue
     private Long id;
     private String taskTitle;
     private TaskStatusEnum statusEnum;
