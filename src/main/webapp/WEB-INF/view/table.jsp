@@ -11,7 +11,12 @@
 </head>
 <h1>Table page</h1>
 <br>
-<p id="showData"></p>
+<table>
+    <th>ID</th>
+    <th>Task Title</th>
+    <th>Task status</th>
+    <tbody id="table_body"></tbody>
+</table>
 <div>
     Click on this <strong><a href="/">link</a></strong> to visit previous page.
 </div>

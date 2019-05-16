@@ -1,12 +1,10 @@
-
-
 $(document).ready(function () {
     var ajaxReq = $.ajax('/tasks', {
         dataType: 'json',
         timeout: 500
     }).done(function (data) {
         if (data !== null) {
-             console.log(data);
+            console.log(data.length);
             CreateTableFromJSON(data);
         }
 
@@ -17,8 +15,10 @@ $(document).ready(function () {
 
 function CreateTableFromJSON(data) {
 
-    // EXTRACT VALUE FOR HTML HEADER.
+    //element of table body
+    var tbody = $('#table_body');
 
+    //put column names to arrayList
     var col = [];
     for (var i = 0; i < data.length; i++) {
         for (var key in data[i]) {
@@ -28,32 +28,8 @@ function CreateTableFromJSON(data) {
         }
     }
 
-    // CREATE DYNAMIC TABLE.
-    var table = document.createElement("table");
-
-    // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-    var tr = table.insertRow(-1);                   // TABLE ROW.
-
-    for (var i = 0; i < col.length; i++) {
-        var th = document.createElement("th");      // TABLE HEADER.
-        th.innerHTML = col[i];
-        tr.appendChild(th);
-    }
-
-    // ADD JSON DATA TO THE TABLE AS ROWS.
     for (var i = 0; i < data.length; i++) {
-
-        tr = table.insertRow(-1);
-
-        for (var j = 0; j < col.length; j++) {
-            var tabCell = tr.insertCell(-1);
-            tabCell.innerHTML = data[i][col[j]];
-        }
+        var markup = "<tr><td>" + data[i][col[0]] + "</td><td>" + data[i][col[1]] + "</td><td>" + data[i][col[2]] + "</td></tr>";
+        tbody.append(markup);
     }
-
-    // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-    var divContainer = document.getElementById("showData");
-    divContainer.innerHTML = "";
-    divContainer.appendChild(table);
 }
