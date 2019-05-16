@@ -1,15 +1,26 @@
 package com.accenture.tasks.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.lang.NonNull;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
+@Table(name = "Task")
 public class Task {
+
     @Id
-    @GeneratedValue
+    @Column(name = "id")
+    @SequenceGenerator(name = "seq", initialValue = 4, allocationSize = 100)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq")
     private Long id;
+
+    @Column(name = "taskTitle")
+    @NotBlank(message = "Name is really necessary")
+    @NonNull
     private String taskTitle;
+
+    @Column(name = "statusEnum")
     private TaskStatusEnum statusEnum;
 
     public Task() {

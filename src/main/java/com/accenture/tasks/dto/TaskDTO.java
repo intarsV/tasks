@@ -1,17 +1,32 @@
 package com.accenture.tasks.dto;
 
 import com.accenture.tasks.domain.TaskStatusEnum;
+import org.springframework.lang.NonNull;
+
+import javax.validation.constraints.NotEmpty;
 
 public class TaskDTO {
 
     private Long id;
+
+    @NotEmpty
+    @NonNull
     private String taskTitle;
+
     private TaskStatusEnum statusEnum;
+
+    public TaskDTO() {
+
+    }
 
     public TaskDTO(Long id, String taskTitle, TaskStatusEnum statusEnumn) {
         this.id = id;
         this.taskTitle = taskTitle;
         this.statusEnum = statusEnumn;
+    }
+
+    public TaskDTO(Long id) {
+        this.id = id;
     }
 
     public Long getId() {

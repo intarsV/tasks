@@ -1,6 +1,7 @@
 package com.accenture.tasks.services;
 
 import com.accenture.tasks.domain.Task;
+import com.accenture.tasks.domain.TaskStatusEnum;
 import com.accenture.tasks.dto.TaskDTO;
 import com.accenture.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,4 +31,17 @@ public class TaskService {
         }
         return taskDTOList;
     }
+
+    public Long saveTask(TaskDTO taskDTO) {
+        Task task = new Task();
+        task.setTaskTitle(taskDTO.getTaskTitle());
+        task.setStatusEnum(TaskStatusEnum.ACTIVE);
+        return taskRepository.save(task).getId();
+    }
+
+    public void deleteTask(TaskDTO taskDTO) {
+        taskRepository.findById(taskDTO.getId())
+                .ifPresent(taskRepository::delete);
+    }
+
 }
