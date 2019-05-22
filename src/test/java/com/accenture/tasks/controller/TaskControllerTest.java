@@ -62,7 +62,6 @@ public class TaskControllerTest {
     @Test
     public void shouldDeleteTaskDTO() throws Exception {
         final long taskId = 7L;
-
         mockMvc.perform(delete("/api/v1/tasks/" + taskId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":" + taskId + ",\"taskTitle\":null,\"statusEnum\":null}"));

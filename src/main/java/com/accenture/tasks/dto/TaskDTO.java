@@ -9,14 +9,13 @@ public class TaskDTO {
 
     private Long id;
 
-    @NotEmpty
+    @NotEmpty (message="Task should have some title!")
     @NonNull
     private String taskTitle;
 
     private TaskStatusEnum statusEnum;
 
     public TaskDTO() {
-
     }
 
     public TaskDTO(Long id, String taskTitle, TaskStatusEnum statusEnumn) {
@@ -27,6 +26,10 @@ public class TaskDTO {
 
     public TaskDTO(Long id) {
         this.id = id;
+    }
+
+    public TaskDTO(@NotEmpty String taskTitle) {
+        this.taskTitle = taskTitle;
     }
 
     public Long getId() {
