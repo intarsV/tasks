@@ -6,18 +6,16 @@ import com.accenture.tasks.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/v1/tasks")
 public class TaskController {
 
-
-    TaskService taskService;
+    private TaskService taskService;
 
     @Autowired
     public TaskController(TaskService taskService) {
@@ -30,14 +28,14 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskDTO> saveTask(@Valid @RequestBody TaskDTO taskDTO, UriComponentsBuilder builder) {
+    public ResponseEntity<TaskDTO> saveTask(@RequestBody @Validated TaskDTO taskDTO) {
         Long id = taskService.saveTask(taskDTO);
         return new ResponseEntity(id, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     public @ResponseBody
-    ResponseEntity<TaskDTO> deleteTask(@Valid @PathVariable("id") Long id) {
+    ResponseEntity<TaskDTO> deleteTask(@PathVariable("id") Long id) {
         TaskDTO taskDTO = new TaskDTO();
         taskDTO.setId(id);
         taskService.deleteTask(taskDTO);
