@@ -1,15 +1,39 @@
 
 h1 {
-    color: blue;
+    color: green;
+}
+
+#dummy_h3 {
+    color: red;
 }
 
 table {
+    width: 300px;
     border: 1px solid green;
+    border-collapse: collapse;
 }
 
-th{
-    border: 1px solid green;
+tr {
+    border:none;
 }
-.myclass{
+
+td{
+    border: none;
+}
+
+.myClass {
     color: red;
 }
+
+#error_screen {
+    color: red;
+}
+
+tr:nth-child(even) {
+    background: #90EE90
+}
+
+tr:nth-child(odd) {
+    background: #FFF
+}
+
