@@ -2,6 +2,7 @@ package com.accenture.tasks.services;
 
 import com.accenture.tasks.domain.Task;
 import com.accenture.tasks.domain.TaskStatusEnum;
+import com.accenture.tasks.dto.ResponseDTO;
 import com.accenture.tasks.dto.TaskDTO;
 import com.accenture.tasks.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaskService {
@@ -21,7 +23,7 @@ public class TaskService {
     }
 
     public List<TaskDTO> getAllTasks() {
-        List<Task> tasks = new ArrayList<>();
+        List<Task> tasks;
         tasks = taskRepository.findAll();
 
         List<TaskDTO> taskDTOList = new ArrayList<>();
@@ -39,9 +41,29 @@ public class TaskService {
         return taskRepository.save(task).getId();
     }
 
-    public void deleteTask(TaskDTO taskDTO) {
-        taskRepository.findById(taskDTO.getId())
-                .ifPresent(taskRepository::delete);
+    public ResponseDTO deleteTask(TaskDTO taskDTO) {
+        ResponseDTO response = new ResponseDTO("Delete failed!");
+        Optional<Task> searchTask = taskRepository.findById(taskDTO.getId());
+        if (!searchTask.isPresent()) {
+            return response;
+        } else {
+            taskRepository.delete(searchTask.get());
+            response.setMessage("Deleted task with ID: " + taskDTO.getId() + "successfully");
+        }
+        return response;
     }
 
+    public ResponseDTO updateTask(TaskDTO taskDTO) {
+        ResponseDTO response = new ResponseDTO("Oops, something went wrong!");
+        Task task;
+        Optional<Task> searchForTask = taskRepository.findById(taskDTO.getId());
+        if (!searchForTask.isPresent()) {
+            return response;
+        }
+        task = searchForTask.get();
+        task.setStatusEnum(taskDTO.getStatusEnum());
+        taskRepository.save(task);
+        response.setMessage("Update successful!");
+        return response;
+    }
 }
