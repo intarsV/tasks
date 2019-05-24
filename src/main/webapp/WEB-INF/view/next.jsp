@@ -8,12 +8,10 @@
 </head>
 <body>
 <div>
-    <div>
-        <h1>Dummy page</h1>
-        <h2>${message}</h2>
-        <h3 id="dummy_h3">${messageBack}</h3>
-        Click on this <strong><a href="/">link</a></strong> to visit previous page.
-    </div>
+    <h1>Dummy page</h1>
+    <h2>${message}</h2>
+    <h3 id="dummy_h3">${messageBack}</h3>
+    Click on this <strong><a href="/">link</a></strong> to visit previous page.
 </div>
 </body>
 </html>

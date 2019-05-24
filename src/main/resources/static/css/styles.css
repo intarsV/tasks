@@ -13,19 +13,15 @@ table {
     border-collapse: collapse;
 }
 
-tr {
-    border:none;
-}
-
-td{
+tr, td {
     border: none;
 }
 
-.myClass {
-    color: red;
+select {
+    background-color: transparent;
 }
 
-#error_screen {
+.myClass, #message_screen {
     color: red;
 }
 
