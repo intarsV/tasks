@@ -33,3 +33,17 @@ tr:nth-child(odd) {
     background: #FFF
 }
 
+form label {
+    display: inline-block;
+    width: 70px;
+}
+
+.error {
+    color: red;
+    /*margin-left: 5px;*/
+}
+
+label.error {
+    display: inline;
+}
+

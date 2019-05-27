@@ -66,8 +66,8 @@ public class TaskServiceTest {
     @Test
     public void shouldReturnOkMessageOnTaskDelete() {
         ResponseDTO response = new ResponseDTO("Deleted task with ID: " + taskDTO.getId() + "successfully failed!");
-        when(taskRepository.findById(taskDTO.getId())).thenReturn(Optional.of(task));
-        service.deleteTask(taskDTO);
+        when(taskRepository.findById(any(Long.class))).thenReturn(Optional.of(task));
+        service.deleteTask(2L);
         assertEquals(response.getMessage(), "Deleted task with ID: " + taskDTO.getId() + "successfully failed!");
         verify(taskRepository).delete(any(Task.class));
     }
@@ -75,8 +75,8 @@ public class TaskServiceTest {
     @Test
     public void shouldReturnErrorMessageOnTaskDelete() {
         ResponseDTO response = new ResponseDTO("Delete failed!");
-        when(taskRepository.findById(taskDTO.getId())).thenReturn(Optional.empty());
-        service.deleteTask(taskDTO);
+        when(taskRepository.findById(any(Long.class))).thenReturn(Optional.empty());
+        service.deleteTask(2L);
         assertEquals(response.getMessage(), "Delete failed!");
     }
 

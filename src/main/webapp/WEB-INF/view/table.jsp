@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <c:url value="/css/styles.css" var="css_url"/>
     <link href="${css_url}" type="text/css" rel="stylesheet"/>
     <c:url value="/js/tasks.js" var="js_url"/>
@@ -13,9 +14,15 @@
 <body>
 <h1>Task list page</h1>
 <br>
-<form>
-    <input id="taskTitle" type="text" style="width: 200px" placeholder="enter new task title...">
-    <input id="submit" type="button" value="Add task">
+<form id="input_form" method="post" action="">
+    <div>
+        <label for="taskTitle">Task Title:</label>
+        <input id="taskTitle" name="taskTitle" type="text" style="width: 200px" placeholder="enter new task title...">
+    </div>
+    <br>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
 </form>
 <span id="message_screen"></span>
 <br>

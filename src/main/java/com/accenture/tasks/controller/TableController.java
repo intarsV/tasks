@@ -10,8 +10,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-
 public class TableController {
+
+    private static final Map<Integer, String> STATUS = new HashMap<>();
+
+    static {
+        STATUS.put(0, "ACTIVE");
+        STATUS.put(1, "INPROGRESS");
+        STATUS.put(2, "CANCELLED");
+        STATUS.put(3, "FINISHED");
+    }
 
     private TaskService taskService;
 
@@ -22,13 +30,8 @@ public class TableController {
 
     @RequestMapping("/table")
     public String table(Model model) {
-        Map<Integer, String> status = new HashMap<>();
-        status.put(0, "ACTIVE");
-        status.put(1, "INPROGRESS");
-        status.put(2, "CANCELLED");
-        status.put(3, "FINISHED");
         model.addAttribute("taskData", taskService.getAllTasks());
-        model.addAttribute("statusOptions", status);
+        model.addAttribute("statusOptions", STATUS);
         return "table";
     }
 

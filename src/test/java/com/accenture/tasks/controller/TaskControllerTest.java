@@ -63,6 +63,8 @@ public class TaskControllerTest {
     @Test
     public void shouldDeleteTaskDTO() throws Exception {
         final long taskId = 7L;
+        ResponseDTO responseDTO = new ResponseDTO("Update successful!");
+        when(this.taskService.deleteTask(any(Long.class))).thenReturn(responseDTO);
         mockMvc.perform(delete("/api/v1/tasks/" + taskId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":" + taskId + ",\"taskTitle\":null,\"statusEnum\":null}"));
@@ -89,8 +91,7 @@ public class TaskControllerTest {
         mockMvc.perform(put("/api/v1/tasks")
                 .contentType(APPLICATION_JSON_UTF8)
                 .content(body))
-                .andExpect(status().isOk())
-                .andExpect(content().json("{\"message\":\"Oops, something went wrong!\"}"));
+                .andExpect(status().is4xxClientError())
+                .andExpect(content().string("Update process failed - task not found"));
     }
-
 }

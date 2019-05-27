@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class TaskService {
 
-    TaskRepository taskRepository;
+    private TaskRepository taskRepository;
 
     @Autowired
     public TaskService(TaskRepository taskRepository) {
@@ -23,9 +23,7 @@ public class TaskService {
     }
 
     public List<TaskDTO> getAllTasks() {
-        List<Task> tasks;
-        tasks = taskRepository.findAll();
-
+        List<Task> tasks = taskRepository.findAll();
         List<TaskDTO> taskDTOList = new ArrayList<>();
         for (Task t : tasks) {
             TaskDTO taskDTO = new TaskDTO(t.getId(), t.getTaskTitle(), t.getStatusEnum());
@@ -41,14 +39,14 @@ public class TaskService {
         return taskRepository.save(task).getId();
     }
 
-    public ResponseDTO deleteTask(TaskDTO taskDTO) {
+    public ResponseDTO deleteTask(Long id) {
         ResponseDTO response = new ResponseDTO("Delete failed!");
-        Optional<Task> searchTask = taskRepository.findById(taskDTO.getId());
+        Optional<Task> searchTask = taskRepository.findById(id);
         if (!searchTask.isPresent()) {
             return response;
         } else {
             taskRepository.delete(searchTask.get());
-            response.setMessage("Deleted task with ID: " + taskDTO.getId() + "successfully");
+            response.setMessage("Deleted task with ID: " + id + "successfully");
         }
         return response;
     }
